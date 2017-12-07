@@ -1,0 +1,41 @@
+FROM        alpine:edge
+MAINTAINER  Denis Gebele <gebele@in-silico.ch>
+
+RUN         apk add --update gcc vim make cmake gsl swig ruby git wget ruby-io-console ruby-dev ruby-irb ruby-json ruby-rake ruby-rdoc sudo ruby-bigdecimal fontconfig openjdk7-jre boost-dev musl-dev build-base zlib-dev libffi-dev 
+RUN            gem install bundler
+RUN            bundle config --global silence_root_warning 1
+# cleanup
+RUN         adduser -S ist
+RUN         echo "ist ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# make service installation as user ist
+#
+# "switch to user ist"
+USER        ist
+WORKDIR     /home/ist
+#ADD bashrc /home/ist/bashrc
+#RUN cat bashrc >> /home/ist/.bashrc
+RUN         echo 'gem: --user-install --no-document' > ~/.gemrc
+ENV         PATH $PATH:/home/ist/.gem/ruby/2.4.0/bin
+RUN export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+RUN         gem install bundler
+RUN         git clone https://github.com/opentox/lazar.git 
+
+
+WORKDIR     /home/ist/lazar
+RUN         git checkout "feature/pure" && bundle install --path ~/.gem
+WORKDIR     /home/ist
+
+RUN         git clone https://github.com/opentox/qsar-report.git \
+            && (cd qsar-report && git checkout "development" && bundle install --path ~/.gem)
+
+RUN         git clone https://github.com/opentox/lazar-gui.git \
+            && (cd lazar-gui && git checkout "development" && bundle install --path ~/.gem)
+
+COPY start.sh /home/ist/start.sh
+WORKDIR /home/ist
+RUN sudo chmod +x /home/ist/start.sh
+#RUN gem install bigdecimal 
+#ENTRYPOINT ["/home/ist/start.sh"]
+#ENTRYPOINT ["/home/ist/"]
+
