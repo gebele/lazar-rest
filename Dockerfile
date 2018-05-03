@@ -35,16 +35,23 @@ RUN         export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 RUN         gem install bundler
 RUN         bundle config --global silence_root_warning 1
 
-RUN         git clone https://github.com/opentox/lazar.git \ 
-            && (cd lazar && git checkout "development" && bundle install --path ~/.gem)
+RUN         git clone https://github.com/opentox/lazar.git && \ 
+            cd lazar && \
+            git checkout "development" && \
+            ruby ext/lazar/extconf.rb && \
+            bundle install --path ~/.gem
 
-RUN         git clone https://github.com/opentox/qsar-report.git \
-            && (cd qsar-report && git checkout "development" && bundle install --path ~/.gem)
+RUN         git clone https://github.com/opentox/qsar-report.git && \
+            cd qsar-report && \
+            git checkout "development" && \
+            bundle install --path ~/.gem
 
 RUN         git clone https://github.com/opentox/lazar-public-data.git 
 
-RUN         git clone https://github.com/opentox/lazar-rest.git \
-            && (cd lazar-rest && git checkout "ORN" && bundle install --path ~/.gem)
+RUN         git clone https://github.com/opentox/lazar-rest.git && \
+            cd lazar-rest && \
+            git checkout "ORN" && \
+            bundle install --path ~/.gem
 
 RUN         git clone https://github.com/swagger-api/swagger-ui.git
 
