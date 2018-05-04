@@ -37,7 +37,7 @@ RUN         bundle config --global silence_root_warning 1
 
 RUN         git clone https://github.com/opentox/lazar.git && \ 
             cd lazar && \
-            git checkout "development" && \
+            git checkout "ORN" && \
             ruby ext/lazar/extconf.rb && \
             bundle install --path ~/.gem
 
