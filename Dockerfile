@@ -54,6 +54,7 @@ RUN         git clone https://github.com/opentox/lazar-rest.git && \
             bundle install --path ~/.gem
 
 RUN         git clone https://github.com/swagger-api/swagger-ui.git
+COPY        index.html /home/ist/swagger-ui/dist/index.html
 
 COPY        start.sh /home/ist/start.sh
 WORKDIR     /home/ist
