@@ -53,6 +53,11 @@ RUN         git clone https://github.com/opentox/lazar-rest.git && \
             git checkout "ORN" && \
             bundle install --path ~/.gem
 
+RUN         git clone https://github.com/opentox/lazar-gui.git && \
+            cd lazar-gui && \
+            git checkout "development" && \
+            bundle install --path ~/.gem
+
 RUN         git clone https://github.com/swagger-api/swagger-ui.git
 COPY        index.html /home/ist/swagger-ui/dist/index.html
 

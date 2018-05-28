@@ -4,6 +4,8 @@ sudo mongod &
 R CMD Rserve --vanilla &
 cd $HOME/lazar-rest &&
 unicorn -p 8089 -E production
+cd $HOME/lazar-gui &&
+unicorn -p 8088 -E production
 
 cd $HOME/lazar-public-data
 if [ ! -d "$HOME/lazar-validation-reports" ]
