@@ -57,7 +57,25 @@
       })
 
       window.ui = ui
-    }
+    };
+
+    // add link for gui
+    setTimeout(function() {
+      var base_url = window.location.origin;
+      var section = document.getElementsByClassName("info")[0];
+      var node = document.createElement("gui");
+      var heading = document.createElement('h2');
+      var headingtext = document.createTextNode("Lazar Graphical User Interface");
+      var link = document.createElement('a');
+      var linktext = document.createTextNode("Lazar (GUI)");
+      heading.appendChild(headingtext);
+      link.appendChild(linktext);
+      link.title = "GUI link";
+      link.href = base_url = "/predict";
+      node.appendChild(heading);
+      node.appendChild(link);
+      section.appendChild(node);
+    }, 2000);
   </script>
   </body>
 </html>
