@@ -48,14 +48,14 @@ RUN         git clone https://github.com/opentox/qsar-report.git && \
 
 RUN         git clone https://github.com/opentox/lazar-public-data.git 
 
-RUN         git clone https://github.com/opentox/lazar-rest.git && \
-            cd lazar-rest && \
-            git checkout "ORN" && \
-            bundle install --path ~/.gem
+#RUN         git clone https://github.com/opentox/lazar-rest.git && \
+#            cd lazar-rest && \
+#            git checkout "ORN" && \
+#            bundle install --path ~/.gem
 
 RUN         git clone https://github.com/opentox/lazar-gui.git && \
             cd lazar-gui && \
-            git checkout "development" && \
+            git checkout "ORN" && \
             bundle install --path ~/.gem
 
 RUN         git clone https://github.com/swagger-api/swagger-ui.git
