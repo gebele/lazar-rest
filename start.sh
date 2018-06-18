@@ -1,9 +1,10 @@
 #!/bin/sh
 
+# start basic services
 sudo mongod &
 R CMD Rserve --vanilla &
-#cd $HOME/lazar-rest &&
-#unicorn -p 8089 -E production
+
+# symlinks for swagger
 if ! [[ -h "$HOME/lazar-gui/public/swagger-ui-bundle.js" ]]; then
   ln -s "$HOME/swagger-ui/dist/swagger-ui-bundle.js" "$HOME/lazar-gui/public/swagger-ui-bundle.js"
 fi
@@ -14,11 +15,15 @@ if ! [[ -h "$HOME/lazar-gui/public/swagger-ui.css" ]]; then
   ln -s "$HOME/swagger-ui/dist/swagger-ui.css" "$HOME/lazar-gui/public/swagger-ui.css"
 fi
 
-cd $HOME/lazar-gui &&
-unicorn -p 8089 -E production
+# fetch and load database content
+if [ ! -d "$HOME/dump" ]; then
+  mkdir dump
+  wget https://dump.in-silico.ch/dump.tar.gz
+  tar xfvz dump.tar.gz -C dump
+  mongorestore
+fi
 
-#cd $HOME/lazar-public-data
-#if [ ! -d "$HOME/lazar-validation-reports" ]
-#then
-#  ruby $HOME/lazar-public-data/create_test_prediction_models.rb
-#fi
+# start lazar service
+cd $HOME/lazar-gui &&
+unicorn -p 8088 -E production
+

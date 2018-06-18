@@ -26,8 +26,10 @@ RUN         mkdir -p /data/db
 USER        ist
 WORKDIR     /home/ist
 
-RUN         wget https://cran.r-project.org/src/contrib/Rserve_1.7-3.tar.gz -O Rserve
-RUN         sudo R CMD INSTALL Rserve
+#RUN         wget https://cran.r-project.org/src/contrib/Rserve_1.7-3.tar.gz -O Rserve
+#RUN         sudo R CMD INSTALL Rserve
+RUN         wget http://www.rforge.net/src/contrib/Rserve_1.8-6.tar.gz -O Rserve_1.8-6.tgz
+RUN         sudo R CMD INSTALL Rserve_1.8-6.tgz
 
 RUN         echo 'gem: --user-install --no-document' > ~/.gemrc
 ENV         PATH $PATH:/home/ist/.gem/ruby/2.5.0/bin
