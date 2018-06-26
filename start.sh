@@ -17,9 +17,8 @@ fi
 
 # fetch and load database content
 if [ ! -d "$HOME/dump" ]; then
-  mkdir dump
   wget https://dump.in-silico.ch/dump.tar.gz
-  tar xfvz dump.tar.gz -C dump
+  tar xfvz dump.tar.gz
   mongorestore
 fi
 
