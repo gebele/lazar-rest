@@ -22,7 +22,9 @@ if [ ! -d "$HOME/dump" ]; then
   mongorestore
 fi
 
+# service test
+sh ./test.sh &
+
 # start lazar service
 cd $HOME/lazar-gui &&
 unicorn -p 8088 -E production
-

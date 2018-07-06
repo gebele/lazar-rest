@@ -26,8 +26,6 @@ RUN         mkdir -p /data/db
 USER        ist
 WORKDIR     /home/ist
 
-#RUN         wget https://cran.r-project.org/src/contrib/Rserve_1.7-3.tar.gz -O Rserve
-#RUN         sudo R CMD INSTALL Rserve
 RUN         wget http://www.rforge.net/src/contrib/Rserve_1.8-6.tar.gz -O Rserve_1.8-6.tgz
 RUN         sudo R CMD INSTALL Rserve_1.8-6.tgz
 
@@ -48,13 +46,6 @@ RUN         git clone https://github.com/opentox/qsar-report.git && \
             git checkout "development" && \
             bundle install --path ~/.gem
 
-RUN         git clone https://github.com/opentox/lazar-public-data.git 
-
-#RUN         git clone https://github.com/opentox/lazar-rest.git && \
-#            cd lazar-rest && \
-#            git checkout "ORN" && \
-#            bundle install --path ~/.gem
-
 RUN         git clone https://github.com/opentox/lazar-gui.git && \
             cd lazar-gui && \
             git checkout "ORN" && \
@@ -64,7 +55,10 @@ RUN         git clone https://github.com/swagger-api/swagger-ui.git
 COPY        index.html /home/ist/swagger-ui/dist/index.html
 
 COPY        start.sh /home/ist/start.sh
+COPY        test.sh /home/ist/test.sh
+COPY        service-test.rb /home/ist/service-test.rb
 WORKDIR     /home/ist
 RUN         sudo chmod +x /home/ist/start.sh
+RUN         sudo chmod +x /home/ist/test.sh
 ENTRYPOINT  ["/home/ist/start.sh"]
 
