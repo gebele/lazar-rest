@@ -1,6 +1,7 @@
 FROM        insilicotox/lazar-dev
 MAINTAINER  Denis Gebele <gebele@in-silico.ch>
 
+USER        ist
 WORKDIR     /home/ist
 
 RUN         cd lazar && \
