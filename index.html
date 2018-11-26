@@ -65,6 +65,24 @@
       document.getElementsByClassName('topbar-wrapper')[0].getElementsByTagName('span')[0].innerHTML = "lazar-rest-api";
     };
 
+    // add link for docs
+    setTimeout(function() {
+      var base_url = window.location.origin;
+      var section = document.getElementsByClassName("info")[0];
+      var node = document.createElement("docs");
+      var heading = document.createElement('h2');
+      var headingtext = document.createTextNode("Documentation");
+      var link = document.createElement('a');
+      var linktext = document.createTextNode("See curl examples for a typical workflow.");
+      heading.appendChild(headingtext);
+      link.appendChild(linktext);
+      link.title = "curl examples";
+      link.href = "https://github.com/OpenRiskNet/home/blob/master/openshift/deployments/lazar#curl-examples";
+      link.target = "javascript:void(0);";
+      node.appendChild(heading);
+      node.appendChild(link);
+      section.appendChild(node);
+    }, 1000);
     // add link for gui
     setTimeout(function() {
       var base_url = window.location.origin;
@@ -78,10 +96,11 @@
       link.appendChild(linktext);
       link.title = "GUI link";
       link.href = base_url = "/predict";
+      link.target = "javascript:void(0);";
       node.appendChild(heading);
       node.appendChild(link);
       section.appendChild(node);
-    }, 2000);
+    }, 1000);
   </script>
   </body>
 </html>
