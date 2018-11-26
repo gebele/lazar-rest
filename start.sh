@@ -27,4 +27,5 @@ sh ./test.sh &
 
 # start lazar service
 cd $HOME/lazar-gui &&
+git pull &&
 unicorn -p 8088 -E production
