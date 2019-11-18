@@ -23,7 +23,12 @@ if [ ! -d "$HOME/dump" ]; then
 fi
 
 # service test
-sh ./test.sh &
+#sh ./test.sh &
+
+# start lazar service
+cd $HOME/lazar &&
+git checkout ORN &&
+git pull
 
 # start lazar service
 cd $HOME/lazar-gui &&
